@@ -82,5 +82,6 @@ class TestLiquidadorNomi(unittest.TestCase):
         self.assertAlmostEqual(expected, result, 2)
 
 if __name__ == '__main__':
-    # print( Payment.calcularCuota.__doc__)
     unittest.main()
+
+#holaaa
