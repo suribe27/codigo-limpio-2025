@@ -8,7 +8,7 @@ class ErrorHorasExtra(Exception):
     """¡Error horas extra superior o igual a 90! Sus horas extras son mayores o iguales a 90, lo cual no esta permitido. Por favor verifique y corrija."""
 
 
-def Calculo_Total (salario_base : float, horas_diurnas : int, horas_nocturnas : int, bonos_extra : float, deduccion_adicional : float):
+def calculo_total (salario_base : float, horas_diurnas : int, horas_nocturnas : int, bonos_extra : float, deduccion_adicional : float):
     horas_extra = ((horas_diurnas*6189)*0.25) + ((horas_nocturnas*6189)*0.75)
     auxilio_tranporte = 0
     

@@ -1,5 +1,5 @@
 import unittest
-import Calculo_Total
+import model.Calculo_Total as Calculo_Total
 
 class TestLiquidadorNomina(unittest.TestCase):
 

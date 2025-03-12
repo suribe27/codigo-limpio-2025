@@ -1,4 +1,4 @@
-import Calculo_Total
+from model import Calculo_Total
 
 try:
     
