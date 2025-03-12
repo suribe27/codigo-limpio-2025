@@ -29,5 +29,3 @@ def calculo_total (salario_base : float, horas_diurnas : int, horas_nocturnas : 
       raise ErrorDeduccionesM ("¡Error deduciones mayores al 40%! Sus deduciones son mayores al 40% del salario, por favor verifique y corrija. ")
 
     return (salario_base+horas_extra+bonos-deducciones)
-
-    

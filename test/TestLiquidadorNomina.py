@@ -1,5 +1,7 @@
 import unittest
-import model.Calculo_Total as Calculo_Total
+import sys
+sys.path.append("src")
+from model.Calculo_Total import *
 
 class TestLiquidadorNomina(unittest.TestCase):
 
@@ -12,7 +14,7 @@ class TestLiquidadorNomina(unittest.TestCase):
 
         expected = 1989040
 
-        result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+        result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
         self.assertEqual(expected, result)
 
@@ -25,7 +27,7 @@ class TestLiquidadorNomina(unittest.TestCase):
 
         expected = 1536157.35
 
-        result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+        result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
         self.assertAlmostEqual(expected, result, 2)
 
@@ -38,7 +40,7 @@ class TestLiquidadorNomina(unittest.TestCase):
 
         expected = 2081040
 
-        result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+        result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
         self.assertAlmostEqual(expected, result, 2)
 
@@ -52,7 +54,7 @@ class TestLiquidadorNomina(unittest.TestCase):
         expected = 1552341.07
 
 
-        result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+        result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
         self.assertAlmostEqual(expected, result, 2)
 
@@ -65,7 +67,7 @@ class TestLiquidadorNomina(unittest.TestCase):
 
         expected = 1949040
 
-        result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+        result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
         self.assertAlmostEqual(expected, result, 2)
 
@@ -78,7 +80,7 @@ class TestLiquidadorNomina(unittest.TestCase):
 
         expected = 1998106.37
 
-        result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+        result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
         self.assertAlmostEqual(expected, result, 2)
     
@@ -91,9 +93,9 @@ class TestLiquidadorNomina(unittest.TestCase):
         bonos_extra = 0
         deduccion_adicional = 0
 
-        with self.assertRaises (Calculo_Total.ErrorSalarioN):
+        with self.assertRaises (ErrorSalarioN):
 
-            result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+            result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
 
     def test_error_2(self):
@@ -103,9 +105,9 @@ class TestLiquidadorNomina(unittest.TestCase):
         bonos_extra = 300000
         deduccion_adicional = 1400000
                     
-        with self.assertRaises (Calculo_Total.ErrorDeduccionesM):
+        with self.assertRaises (ErrorDeduccionesM):
 
-             result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+             result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
     
         
@@ -117,9 +119,9 @@ class TestLiquidadorNomina(unittest.TestCase):
         bonos_extra = 0
         deduccion_adicional = 0
                     
-        with self.assertRaises (Calculo_Total.ErrorHorasExtra):
+        with self.assertRaises (ErrorHorasExtra):
             
-            result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+            result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
     def test_error_4(self):
         salario_base = "tres millones"
@@ -130,7 +132,7 @@ class TestLiquidadorNomina(unittest.TestCase):
                     
         with self.assertRaises (Exception):
             
-            result = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+            result = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
         
         
 if __name__ == '__main__':

@@ -1,4 +1,6 @@
-from model import Calculo_Total
+import sys
+sys.path.append("src")
+from model.Calculo_Total import *
 
 try:
     
@@ -8,18 +10,18 @@ try:
     bonos_extra = float(input("Ingrese sus bonos extras: "))
     deduccion_adicional = float(input("Ingrese sus deducciones adicionales: "))
 
-    nomina = Calculo_Total.Calculo_Total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
+    nomina = calculo_total(salario_base, horas_diurnas, horas_nocturnas, bonos_extra, deduccion_adicional)
 
     print (f"El valor total de su nomina es {nomina}")
 
-except Calculo_Total.ErrorSalarioN as ex:
+except ErrorSalarioN as ex:
     print( str(ex))
     
-except Calculo_Total.ErrorDeduccionesM as ex:
+except ErrorDeduccionesM as ex:
     print( str(ex))
 
   
-except Calculo_Total.ErrorHorasExtra as ex:
+except ErrorHorasExtra as ex:
     print( str(ex))
     
 except Exception as ex:
