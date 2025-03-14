@@ -68,7 +68,7 @@ Estructura del Proyecto:
 │── README.md                   # Documentación del proyecto  
 ```
 
----
+
 
 Componentes Principales:
 
@@ -88,7 +88,7 @@ Excepciones Personalizadas:
 - `ErrorDeduccionesM`: Se lanza si las deducciones superan el 40% del salario.  
 - `ErrorHorasExtra`: Se lanza si las horas extras superan o son iguales a 90.  
 
----
+
 
 --> Interfaz de Usuario en Consola (`src/consola.py`):
 Este módulo permite la interacción con el usuario a través de la terminal.  
@@ -99,7 +99,7 @@ Características:
 - Muestra el resultado final en pantalla.  
 - Manejo de errores y validaciones de entrada.  
 
----
+
 
 --> Pruebas Unitarias (`test/TestLiquidadorNomina.py`): 
 Este módulo se encarga de validar la correcta funcionalidad del cálculo de nómina.  
