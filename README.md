@@ -41,3 +41,133 @@ Salida
 return (salario_base+horas_extra+bonos-deducciones)
 
 Para poder dar el resultado final, se suma el salario, la ganancia de las horas extras y bonos, y se le resta las deducciones.
+
+
+
+ ---> Instrucciones para ejecutar las pruebas unitarias en el README:
+
+
+ Instrucciones para Ejecutar las Pruebas Unitarias  
+
+El proyecto incluye un conjunto de pruebas unitarias para garantizar la correcta funcionalidad del cálculo de la nómina. Estas pruebas están definidas en el archivo `TestLiquidadorNomina.py` y se ejecutan con `unittest`.  
+
+Requisitos Previos
+Antes de ejecutar las pruebas, asegúrate de tener instalado Python en tu sistema. Puedes verificarlo con el siguiente comando:  
+
+```sh
+python --version
+```
+
+Pasos para Ejecutar las Pruebas:
+
+1. Abrir la terminal o línea de comandos:
+   - En Windows: `cmd` o `PowerShell`  
+   - En macOS/Linux: `Terminal`  
+
+2. Navegar al directorio del proyecto:
+   Usa el comando `cd` para moverte a la carpeta donde está el proyecto. Por ejemplo:  
+
+   ```sh
+   cd ruta/del/proyecto
+   ```
+
+3. Ejecutar las pruebas:
+   Para correr todas las pruebas unitarias, usa el siguiente comando:  
+
+   ```sh
+   python -m unittest TestLiquidadorNomina.py
+   ```
+
+4. Ver los resultados
+   - Si todas las pruebas pasan, verás un mensaje indicando que las pruebas fueron exitosas.  
+   - Si alguna prueba falla, se mostrará un mensaje con detalles sobre el error.  
+
+Ejemplo de Salida Exitosa:
+```
+.....
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+```
+
+Solución de Problemas:
+- Si recibes un error indicando que `unittest` no está disponible, asegúrate de estar usando la versión correcta de Python.  
+- Si hay errores de importación, revisa que el archivo `TestLiquidadorNomina.py` esté en el mismo directorio o que el módulo `Calculo_Total` esté correctamente referenciado.  
+
+
+
+---->  Instrucciones para ejecutar la interfaz de Consola:
+
+
+El proyecto incluye un archivo `consola.py`, que permite al usuario ingresar datos y calcular la liquidación de nómina de manera interactiva a través de la terminal.  
+
+Requisitos Previos:
+Antes de ejecutar la interfaz de consola, asegúrate de tener instalado Python en tu sistema. Puedes verificarlo con el siguiente comando:  
+
+```sh
+python --version
+```
+
+Pasos para Ejecutar la Interfaz de Consola:
+
+1. Abrir la terminal o línea de comandos:
+   - En Windows: `cmd` o `PowerShell`  
+   - En macOS/Linux: `Terminal`  
+
+2. Navegar al directorio del proyecto:
+   Usa el comando `cd` para moverte a la carpeta donde está el archivo `consola.py`.  
+
+   ```sh
+   cd ruta/del/proyecto
+   ```
+
+3. Ejecutar el archivo de la interfaz: 
+   Para iniciar la aplicación de consola, ejecuta el siguiente comando:  
+
+   ```sh
+   python consola.py
+   ```
+
+4. Ingresar los datos solicitados:
+   La aplicación pedirá que ingreses la siguiente información:  
+   - Salario base  
+   - Horas extras diurnas  
+   - Horas extras nocturnas  
+   - Bonos extra  
+   - Deducciones adicionales  
+
+   Introduce los valores según se te pida y presiona `Enter` después de cada uno.
+
+5. Ver el resultado:  
+   Una vez ingresados los datos, el programa calculará la liquidación de la nómina y mostrará el resultado en pantalla.  
+
+   Ejemplo de salida:
+   ```
+   Ingrese su salario base: 2000000
+   Ingrese sus horas extras diurnas: 5
+   Ingrese sus horas extras nocturnas: 2
+   Ingrese sus bonos extras: 50000
+   Ingrese sus deducciones adicionales: 100000
+   El valor total de su nómina es 1,950,320.00
+   ```
+
+Manejo de Errores:
+
+Si ingresas datos incorrectos, el sistema mostrará mensajes de error como:  
+- Salario base negativo: `¡Error salario negativo!`  
+- Deducciones mayores al 40%: `¡Error deducciones mayores al 40%!`  
+- Horas extras no permitidas: `¡Error horas extra superior o igual a 90!`  
+- Entrada inválida: `¡Error digitación! No puedes ingresar letras, por favor corrija ingresando datos numéricos.`  
+
+Notas Adicionales:
+
+- Para finalizar la ejecución, puedes presionar `Ctrl + C` en la terminal.  
+- Si experimentas errores de importación, asegúrate de que los archivos `Calculo_Total.py` y `consola.py` estén en la misma carpeta o correctamente referenciados.  
+
+
+
+
+
+
+
