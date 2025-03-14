@@ -40,11 +40,87 @@ Salida
 
 return (salario_base+horas_extra+bonos-deducciones)
 
-Para poder dar el resultado final, se suma el salario, la ganancia de las horas extras y bonos, y se le resta las deducciones.
+Para poder dar el resultado final, se suma el salario, la ganancia de las horas extras y bonos, y se le resta las 
+deducciones.
+
+
+---------------------------------------------------------------------
+
+
+------>  Descripción de la arquitectura:
+
+
+Arquitectura del Proyecto:  
+
+El proyecto sigue una arquitectura modular para garantizar un código mantenible, escalable y fácil de entender. Se organiza en los siguientes componentes principales:  
+
+Estructura del Proyecto:
+
+```
+/codigo-limpio-2025  
+│── src/                        # Código fuente principal  
+│   ├── Calculo_Total.py        # Módulo de cálculo de nómina  
+│   ├── consola.py              # Interfaz de usuario en consola  
+│  
+│── test/                       # Pruebas unitarias  
+│   ├── TestLiquidadorNomina.py # Archivo de pruebas con unittest  
+│  
+│── README.md                   # Documentación del proyecto  
+```
+
+---
+
+Componentes Principales:
+
+--> Módulo de Cálculo (`src/Calculo_Total.py`):
+Este archivo contiene la lógica principal para calcular la nómina de un empleado.  
+
+Funcionalidades principales:
+
+- Cálculo de horas extras diurnas y nocturnas.  
+- Asignación de auxilio de transporte si aplica.  
+- Suma de bonos extra y deducciones.  
+- Validación de datos para evitar errores en los cálculos.  
+
+Excepciones Personalizadas:
+
+- `ErrorSalarioN`: Se lanza si el salario base es negativo.  
+- `ErrorDeduccionesM`: Se lanza si las deducciones superan el 40% del salario.  
+- `ErrorHorasExtra`: Se lanza si las horas extras superan o son iguales a 90.  
+
+---
+
+--> Interfaz de Usuario en Consola (`src/consola.py`):
+Este módulo permite la interacción con el usuario a través de la terminal.  
+
+Características: 
+- Solicita datos al usuario: salario, horas extras, bonos y deducciones.  
+- Llama a `calculo_total()` para procesar la nómina.  
+- Muestra el resultado final en pantalla.  
+- Manejo de errores y validaciones de entrada.  
+
+---
+
+--> Pruebas Unitarias (`test/TestLiquidadorNomina.py`): 
+Este módulo se encarga de validar la correcta funcionalidad del cálculo de nómina.  
+
+Incluye pruebas para:
+- Escenarios normales (cálculos correctos).  
+- Casos límite (salarios bajos, muchas horas extra, etc.).  
+- Errores esperados (valores negativos, deducciones muy altas, etc.).  
+
+Framework utilizado:
+-`unittest` (Incluido en Python por defecto).  
 
 
 
- ---> Instrucciones para ejecutar las pruebas unitarias en el README:
+
+
+---------------------------------------------------------------------
+
+
+
+------> Instrucciones para ejecutar las pruebas unitarias:
 
 
  Instrucciones para Ejecutar las Pruebas Unitarias  
@@ -96,8 +172,11 @@ Solución de Problemas:
 - Si hay errores de importación, revisa que el archivo `TestLiquidadorNomina.py` esté en el mismo directorio o que el módulo `Calculo_Total` esté correctamente referenciado.  
 
 
+---------------------------------------------------------------------
 
----->  Instrucciones para ejecutar la interfaz de Consola:
+
+
+------>  Instrucciones para ejecutar la interfaz de Consola:
 
 
 El proyecto incluye un archivo `consola.py`, que permite al usuario ingresar datos y calcular la liquidación de nómina de manera interactiva a través de la terminal.  
