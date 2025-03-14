@@ -57,18 +57,32 @@ El proyecto sigue una arquitectura modular para garantizar un código mantenible
 Estructura del Proyecto:
 
 ```
-/codigo-limpio-2025  
-│── src/                        # Código fuente principal  
-│   ├── Calculo_Total.py        # Módulo de cálculo de nómina  
-│   ├── consola.py              # Interfaz de usuario en consola  
-│  
-│── test/                       # Pruebas unitarias  
-│   ├── TestLiquidadorNomina.py # Archivo de pruebas con unittest  
-│  
-│── README.md                   # Documentación del proyecto  
+/liquidador-nomina-2025
+│── AUDIO Y EXCEL/                     # Archivos auxiliares
+│   │── CASOS LIQUIDACION NOMINA (1)... # Archivo con casos de prueba en Excel
+│   │── WhatsApp Ptt 2025-02-11...      # Nota de voz relacionada con el proyecto
+│
+│── src/                                # Código fuente principal
+│   │── controller/                     # Controlador que maneja la lógica de la aplicación
+│   │   │── __init__.py                 # Inicializa el módulo del controlador
+│   │
+│   │── model/                          # Módulo de cálculo de nómina
+│   │   │── __pycache__/                 # Caché de Python
+│   │   │── __init__.py                 # Inicializa el módulo del modelo
+│   │   │── Calculo_Total.py            # Contiene las fórmulas y lógica de liquidación
+│   │
+│   │── view/                           # Módulo de la interfaz de usuario
+│   │   │── __pycache__/                 # Caché de Python
+│   │   │── __init__.py                 # Inicializa el módulo de la vista
+│   │   │── consola.py                  # Interfaz de usuario en consola
+│
+│── test/                               # Pruebas unitarias
+│   │── __pycache__/                     # Caché de Python
+│   │── __init__.py                     # Inicializa el módulo de pruebas
+│   │── TestLiquidadorNomina.py         # Archivo de pruebas con unittest
+│
+│── README.md                           # Documentación del proyecto
 ```
-
-
 
 Componentes Principales:
 
