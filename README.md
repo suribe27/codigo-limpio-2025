@@ -266,13 +266,13 @@ Antes de ejecutar la aplicación, asegúrese de tener instalado:
 - **Kivy**
 - **Virtualenv (opcional pero recomendado)**
 
-Si no tiene Kivy instalado, puede hacerlo con:
+Si no tiene Kivy instalado, puede hacerlo con este comando en la terminal:
 ```sh
 pip install kivy
 ```
 
 ## ▶️ Ejecución
-Desde la carpeta **raíz** del proyecto, ejecute el siguiente comando para iniciar la interfaz gráfica:
+Desde la carpeta **raíz** del proyecto, ejecute el siguiente comando en la terminal para iniciar la interfaz gráfica:
 ```sh
 python src/view/gui/kivy_gui.py
 ```
