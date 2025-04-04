@@ -258,6 +258,31 @@ Notas Adicionales:
 - Para finalizar la ejecución, puedes presionar `Ctrl + C` en la terminal.  
 - Si experimentas errores de importación, asegúrate de que los archivos `Calculo_Total.py` y `consola.py` estén en la misma carpeta o correctamente referenciados.  
 
+# 📌 Interfaz Grafica
+
+## 🚀 Requisitos Previos
+Antes de ejecutar la aplicación, asegúrese de tener instalado:
+- **Python 3.8+**
+- **Kivy**
+- **Virtualenv (opcional pero recomendado)**
+
+Si no tiene Kivy instalado, puede hacerlo con:
+```sh
+pip install kivy
+```
+
+## ▶️ Ejecución
+Desde la carpeta **raíz** del proyecto, ejecute el siguiente comando para iniciar la interfaz gráfica:
+```sh
+python src/view/gui/kivy_gui.py
+```
+
+## 📝 Notas
+- Asegúrese de ejecutar el comando desde la carpeta **CODIGO-LIMPIO-2025_GUI**.
+- Si tiene problemas con Kivy, intente reinstalarlo con `pip install --upgrade kivy`.
+
+## 📌 Autores
+Interfaz grafica desarrollada por Juan Sebastian Pinilla Giraldo y Juan Esteban Vallejo
 
 
 
