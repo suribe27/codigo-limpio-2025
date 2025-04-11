@@ -1,5 +1,6 @@
-Samuel Uribe Salazar
-Valery Monsalve Correa
+Hecho por:
+- Samuel Uribe Salazar
+- Valery Monsalve Correa
 
 Este proyecto ayuda a poder calcular la Liquidación de Nomina de Empleados.
 
