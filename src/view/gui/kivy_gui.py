@@ -1,6 +1,13 @@
-
 import sys
-sys.path.append("src") 
+import os
+
+# Soporte para PyInstaller: permite que encuentre correctamente el paquete model
+if hasattr(sys, '_MEIPASS'):
+    # Si es una aplicación compilada, agrega la ruta temporal usada por PyInstaller
+    sys.path.append(os.path.join(sys._MEIPASS, "src"))
+else:
+    # Si es ejecución normal (desarrollo)
+    sys.path.append("src")
 
 from model.Calculo_Total import *
 
