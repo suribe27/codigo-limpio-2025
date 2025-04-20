@@ -272,17 +272,19 @@ pip install kivy
 ```
 
 ## ▶️ Ejecución
-Desde la carpeta **raíz** del proyecto, ejecute el siguiente comando en la terminal para iniciar la interfaz gráfica:
+- Desde la carpeta **raíz** del proyecto, ejecute el siguiente comando en la terminal para iniciar la interfaz gráfica:
 ```sh
 python src/view/gui/kivy_gui.py
 ```
+
+- Desde la carpeta raiz del proyecto tambien puede ejecutar kivy_gui.exe en la ruta dist\kivy_gui.
 
 ## 📝 Notas
 - Asegúrese de ejecutar el comando desde la carpeta **CODIGO-LIMPIO-2025_GUI**.
 - Si tiene problemas con Kivy, intente reinstalarlo con `pip install --upgrade kivy`.
 
 ## 📌 Autores
-Interfaz grafica desarrollada por Juan Sebastian Pinilla Giraldo y Juan Esteban Vallejo
+Interfaz grafica desarrollada por Juan Sebastian Pinilla Giraldo
 
 
 
