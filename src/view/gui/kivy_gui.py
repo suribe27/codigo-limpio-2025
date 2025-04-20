@@ -161,7 +161,9 @@ class NominaApp(BoxLayout):
 
 class MainApp(App):
     def build(self):
+        self.title = "Calculadora Nómina"  # Cambia el título de la ventana
         return NominaApp()
+
 
 if __name__ == '__main__':
     MainApp().run()
