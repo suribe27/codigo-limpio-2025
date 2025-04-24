@@ -284,8 +284,7 @@ python src/view/gui/kivy_gui.py
 - Si tiene problemas con Kivy, intente reinstalarlo con `pip install --upgrade kivy`.
 
 ## 📌 Autores
-Interfaz grafica desarrollada por Juan Sebastian Pinilla Giraldo
-
+Interfaz grafica desarrollada por Juan Sebastian Pinilla Giraldo y Juan Vallejo
 
 
 
