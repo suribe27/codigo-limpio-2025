@@ -9,7 +9,7 @@ else:
     # Si es ejecución normal (desarrollo)
     sys.path.append("src")
 
-from model.main import *
+from model.calculo_total import *
 
 from kivy.config import Config
 from kivy.app import App
