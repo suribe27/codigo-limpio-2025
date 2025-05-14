@@ -1,7 +1,7 @@
 import unittest
 import sys
 sys.path.append("src")
-from src.model.Calculo_Total import *
+from src.model.calculo_total import *
 
 class TestLiquidadorNomina(unittest.TestCase):
 
