@@ -1,5 +1,9 @@
-import sys
 import os
+import sys
+
+# os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+os.environ["PATH"] += os.pathsep + r"D:\share\glew\bin"
+
 
 # Soporte para PyInstaller: permite que encuentre correctamente el paquete model
 if hasattr(sys, '_MEIPASS'):
@@ -11,7 +15,7 @@ else:
 
 from model.calculo_total import *
 
-from kivy.config import Config
+
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label

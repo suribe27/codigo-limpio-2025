@@ -1,6 +1,6 @@
 import sys
 sys.path.append("src")
-from model.Calculo_Total import *
+from model.calculo_total import *
 
 try:
     
