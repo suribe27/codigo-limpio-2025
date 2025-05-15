@@ -699,7 +699,7 @@ class InterfazSimple:
                 self.listar_configuraciones()
             elif opcion == 2:
                 self.modificar_configuracion()
-    
+
     def listar_configuraciones(self):
         """Función para listar todos los parámetros de configuración"""
         self.limpiar_pantalla()
@@ -714,7 +714,6 @@ class InterfazSimple:
                 print("-" * 80)
                 
                 for config in configuraciones:
-                    # Formatear el valor según el tipo de parámetro
                     if 'porcentaje' in config.nombre_parametro.lower():
                         valor_formateado = f"{config.valor * 100:.2f}%"
                     elif config.valor >= 1000:
@@ -736,77 +735,75 @@ class InterfazSimple:
             print(traceback.format_exc())
         
         self.pausa()
-    
-def modificar_configuracion(self):
-    """Función para modificar un parámetro de configuración"""
-    self.limpiar_pantalla()
-    print("=" * 50)
-    print("MODIFICAR PARÁMETRO DE CONFIGURACIÓN".center(50))
-    print("=" * 50)
-    
-    try:
-        # Primero mostrar todos los parámetros para que el usuario pueda elegir
-        configuraciones = Configuracion.get_all()
-        if not configuraciones:
-            print("\nNo hay parámetros de configuración registrados.")
-            self.pausa()
-            return
+
+    def modificar_configuracion(self):
+        """Función para modificar un parámetro de configuración"""
+        self.limpiar_pantalla()
+        print("=" * 50)
+        print("MODIFICAR PARÁMETRO DE CONFIGURACIÓN".center(50))
+        print("=" * 50)
         
-        print("\n{:<5} {:<30} {:<15} {:<30}".format("ID", "Parámetro", "Valor", "Descripción"))
-        print("-" * 80)
-        
-        for config in configuraciones:
-            # Formatear el valor según el tipo de parámetro
+        try:
+            configuraciones = Configuracion.get_all()
+            if not configuraciones:
+                print("\nNo hay parámetros de configuración registrados.")
+                self.pausa()
+                return
+            
+            print("\n{:<5} {:<30} {:<15} {:<30}".format("ID", "Parámetro", "Valor", "Descripción"))
+            print("-" * 80)
+            
+            for config in configuraciones:
+                if 'porcentaje' in config.nombre_parametro.lower():
+                    valor_formateado = f"{config.valor * 100:.2f}%"
+                elif config.valor >= 1000:
+                    valor_formateado = f"${config.valor:,.0f}"
+                else:
+                    valor_formateado = str(config.valor)
+                
+                print("{:<5} {:<30} {:<15} {:<30}".format(
+                    config.id,
+                    config.nombre_parametro,
+                    valor_formateado,
+                    config.descripcion[:30] if config.descripcion else ""
+                ))
+            
+            config_id = self.obtener_entero("\nID del parámetro a modificar (0 para cancelar): ")
+            if config_id == 0:
+                return
+            
+            config = next((c for c in configuraciones if c.id == config_id), None)
+            if not config:
+                print(f"\nNo se encontró un parámetro con ID {config_id}")
+                self.pausa()
+                return
+            
+            print(f"\nModificando: {config.nombre_parametro}")
+            print(f"Valor actual: {config.valor}")
+            print(f"Descripción: {config.descripcion}")
+            
             if 'porcentaje' in config.nombre_parametro.lower():
-                valor_formateado = f"{config.valor * 100:.2f}%"
-            elif config.valor >= 1000:
-                valor_formateado = f"${config.valor:,.0f}"
+                nuevo_valor = self.obtener_float(f"Nuevo valor (en porcentaje, actual: {config.valor * 100:.2f}%): ") / 100
             else:
-                valor_formateado = str(config.valor)
+                nuevo_valor = self.obtener_float(f"Nuevo valor (actual: {config.valor}): ")
             
-            print("{:<5} {:<30} {:<15} {:<30}".format(
-                config.id,
-                config.nombre_parametro,
-                valor_formateado,
-                config.descripcion[:30] if config.descripcion else ""
-            ))
-        
-        # Elegir el parámetro a modificar
-        config_id = self.obtener_entero("\nID del parámetro a modificar (0 para cancelar): ")
-        if config_id == 0:
-            return
-        
-        # Buscar el parámetro seleccionado
-        config = next((c for c in configuraciones if c.id == config_id), None)
-        if not config:
-            print(f"\nNo se encontró un parámetro con ID {config_id}")
-            self.pausa()
-            return
-        
-        print(f"\nModificando: {config.nombre_parametro}")
-        print(f"Valor actual: {config.valor}")
-        print(f"Descripción: {config.descripcion}")
-        
-        # Obtener nuevo valor
-        if 'porcentaje' in config.nombre_parametro.lower():
-            nuevo_valor = self.obtener_float(f"Nuevo valor (en porcentaje, actual: {config.valor * 100:.2f}%): ") / 100
-        else:
-            nuevo_valor = self.obtener_float(f"Nuevo valor (actual: {config.valor}): ")
-        
-        # Confirmar el cambio
-        confirmar = input("\n¿Desea guardar este cambio? (s/n): ").strip().lower()
-        if confirmar == 's':
-            # Actualizar el valor
-            config.valor = nuevo_valor
-            if config.save():
-                print(f"\n¡Parámetro '{config.nombre_parametro}' actualizado exitosamente!")
+            confirmar = input("\n¿Desea guardar este cambio? (s/n): ").strip().lower()
+            if confirmar == 's':
+                config.valor = nuevo_valor
+                if config.save():
+                    print(f"\n¡Parámetro '{config.nombre_parametro}' actualizado exitosamente!")
+                else:
+                    print("\n¡Error al actualizar el parámetro!")
             else:
-                print("\n¡Error al actualizar el parámetro!")
-        else:
-            print("\nOperación cancelada.")
-            
-    except Exception as e:
-        print(f"\n¡Error al modificar configuración: {e}")
-        print(traceback.format_exc())
-    
-    self.pausa()
+                print("\nOperación cancelada.")
+                
+        except Exception as e:
+            print(f"\n¡Error al modificar configuración: {e}")
+            print(traceback.format_exc())
+        
+        self.pausa()
+
+if __name__ == "__main__":
+    app = InterfazSimple()
+    app.mostrar_menu_principal()
+
