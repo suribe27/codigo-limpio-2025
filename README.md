@@ -1,291 +1,262 @@
+# Liquidador de Nómina 2025
+
 Hecho por:
 - Samuel Uribe Salazar
 - Valery Monsalve Correa
+- Juan Sebastian Pinilla Giraldo (Interfaz gráfica)
+- Juan Vallejo (Interfaz gráfica)
 
-Este proyecto ayuda a poder calcular la Liquidación de Nomina de Empleados.
+Este proyecto ayuda a poder calcular la Liquidación de Nómina de Empleados.
 
-Entradas
+## 📋 Descripción
 
-salario_base = es el salario base de un usuario en float
-horas_diurnas = son las horas diurnas que realizo un usuario en int
-horas_nocturnas = son las horas nocturnas que realizo un usuario en int
-bonos_extra = son los bonos extra que le fueron asignados a un usuario en float
-deduccion_adicional = son las deducciones adicionales que se le hacen a un usuario en float
+El sistema permite calcular la liquidación de nómina considerando:
+- Salario base
+- Horas extras diurnas y nocturnas
+- Auxilio de transporte (cuando aplica)
+- Bonos adicionales
+- Deducciones
 
----------------------------------------------------------------------
+## 🏗️ Arquitectura del Proyecto
 
-Calculos
+El proyecto sigue una arquitectura modular para garantizar un código mantenible, escalable y fácil de entender. Se organiza en los siguientes componentes principales:
 
-horas_extra = ((horas_diurnas*6189)*0.25) + ((horas_nocturnas*6189)*0.75)
-
-Para el total de horas extra se multiplica la cantidad de hora según la hora del dia en que se haga por la cantidad que paga ese tiempo y se suman las 2, dando un total en float.
-
-   auxilio_tranporte = 0
-
-    if salario_base < 2847000:
-        auxilio_tranporte = 162000
-
-Si el salario base de una persona es menor a 2 SMMVL se la asigna un auxilio de transporte.
-
- bonos = auxilio_tranporte + bonos_extra
-
-A la variable bonos se le asigna la sumatoria del auxilio de transporte si existe y el total de los bonos extra
-
- deducciones = ((salario_base+horas_extra+bonos)*0.08) + deduccion_adicional
-
-Para calcular las deducciones se suma todos los ingresos, se suman y se multiplican por el 8% y luego, si existe, se le suma una deducción adicional.
-
----------------------------------------------------------------------
-
-Salida
-
-return (salario_base+horas_extra+bonos-deducciones)
-
-Para poder dar el resultado final, se suma el salario, la ganancia de las horas extras y bonos, y se le resta las 
-deducciones.
-
-
----------------------------------------------------------------------
-
-
------->  Descripción de la arquitectura:
-
-
-Arquitectura del Proyecto:  
-
-El proyecto sigue una arquitectura modular para garantizar un código mantenible, escalable y fácil de entender. Se organiza en los siguientes componentes principales:  
-
-Estructura del Proyecto:
+### Estructura del Proyecto:
 
 ```
 /liquidador-nomina-2025
-│── AUDIO Y EXCEL/                     # Archivos auxiliares
-│   │── CASOS LIQUIDACION NOMINA (1)... # Archivo con casos de prueba en Excel
-│   │── WhatsApp Ptt 2025-02-11...      # Nota de voz relacionada con el proyecto
+│── AUDIO Y EXCEL/                      # Archivos auxiliares
+│   │── CASOS LIQUIDACION NOMINA.xlsx   # Archivo con casos de prueba 
+│   │── WhatsApp Ptt...                 # Nota de voz relacionada
+│
+│── build/                              # Archivos de compilación
+│
+│── config/                             # Configuración del proyecto
+│   │── __pycache__/                    # Caché de Python
+│   │── __init__.py                     # Inicializador del módulo
+│   │── secret_config.py                # Configuración para conexión a BD
+│
+│── dist/                               # Distribución compilada
+│
+│── sql/                                # Scripts SQL
+│   │── uso.py                          # Utilidades de base de datos
 │
 │── src/                                # Código fuente principal
-│   │── controller/                     # Controlador que maneja la lógica de la aplicación
-│   │   │── __init__.py                 # Inicializa el módulo del controlador
+│   │── __pycache__/                    # Caché de Python
+│   │── __init__.py                     # Inicializador del módulo
 │   │
-│   │── model/                          # Módulo de cálculo de nómina
-│   │   │── __pycache__/                 # Caché de Python
-│   │   │── __init__.py                 # Inicializa el módulo del modelo
-│   │   │── Calculo_Total.py            # Contiene las fórmulas y lógica de liquidación
+│   │── controller/                     # Controladores
+│   │   │── __pycache__/                # Caché de Python
+│   │   │── __init__.py                 # Inicializador del módulo
+│   │   │── configuracion_controller.py # Controlador de configuración
+│   │   │── empleado_controller.py      # Controlador de empleados
+│   │   │── liquidacion_controller.py   # Controlador de liquidación
 │   │
-│   │── view/                           # Módulo de la interfaz de usuario
-│   │   │── __pycache__/                 # Caché de Python
-│   │   │── __init__.py                 # Inicializa el módulo de la vista
-│   │   │── consola.py                  # Interfaz de usuario en consola
+│   │── model/                          # Modelos de datos
+│   │   │── __pycache__/                # Caché de Python
+│   │   │── __init__.py                 # Inicializador del módulo
+│   │   │── calculo_total.py            # Lógica de cálculo
+│   │   │── models.py                   # Modelos de datos
+│   │   │── neon_db.py                  # Conexión a BD Neon
+│   │
+│   │── view/                           # Interfaces de usuario
+│       │── __pycache__/                # Caché de Python
+│       │── __init__.py                 # Inicializador del módulo
+│       │── consola/                    # Interfaz en consola
+│       │   │── main.py                 # Punto de entrada consola
+│       │
+│       │── gui/                        # Interfaz gráfica
+│           │── __init__.py             # Inicializador del módulo
+│           │── interfaz_database.py    # UI para base de datos
 │
-│── test/                               # Pruebas unitarias
-│   │── __pycache__/                     # Caché de Python
-│   │── __init__.py                     # Inicializa el módulo de pruebas
-│   │── TestLiquidadorNomina.py         # Archivo de pruebas con unittest
+│── tests/                              # Pruebas unitarias
+│   │── test_db.py                      # Tests para la base de datos
+│   │── TestLiquidadorNomina.py         # Tests para la liquidación
 │
 │── README.md                           # Documentación del proyecto
 ```
 
-Componentes Principales:
+## 🗄️ Configuración de la Base de Datos (Neon DB)
 
---> Módulo de Cálculo (`src/Calculo_Total.py`):
-Este archivo contiene la lógica principal para calcular la nómina de un empleado.  
+El proyecto utiliza Neon DB, una base de datos PostgreSQL en la nube, para almacenar información de empleados y liquidaciones. A continuación, se detallan los pasos para configurar y conectar a la base de datos.
 
-Funcionalidades principales:
+### 1. Requisitos
 
-- Cálculo de horas extras diurnas y nocturnas.  
-- Asignación de auxilio de transporte si aplica.  
-- Suma de bonos extra y deducciones.  
-- Validación de datos para evitar errores en los cálculos.  
+- Cuenta en Neon DB (https://neon.tech/)
+- Librería psycopg2 para la conexión a PostgreSQL
 
-Excepciones Personalizadas:
-
-- `ErrorSalarioN`: Se lanza si el salario base es negativo.  
-- `ErrorDeduccionesM`: Se lanza si las deducciones superan el 40% del salario.  
-- `ErrorHorasExtra`: Se lanza si las horas extras superan o son iguales a 90.  
-
-
-
---> Interfaz de Usuario en Consola (`src/consola.py`):
-Este módulo permite la interacción con el usuario a través de la terminal.  
-
-Características: 
-- Solicita datos al usuario: salario, horas extras, bonos y deducciones.  
-- Llama a `calculo_total()` para procesar la nómina.  
-- Muestra el resultado final en pantalla.  
-- Manejo de errores y validaciones de entrada.  
-
-
-
---> Pruebas Unitarias (`test/TestLiquidadorNomina.py`): 
-Este módulo se encarga de validar la correcta funcionalidad del cálculo de nómina.  
-
-Incluye pruebas para:
-- Escenarios normales (cálculos correctos).  
-- Casos límite (salarios bajos, muchas horas extra, etc.).  
-- Errores esperados (valores negativos, deducciones muy altas, etc.).  
-
-Framework utilizado:
--`unittest` (Incluido en Python por defecto).  
-
-
-
-
-
----------------------------------------------------------------------
-
-
-
-------> Instrucciones para ejecutar las pruebas unitarias:
-
-
- Instrucciones para Ejecutar las Pruebas Unitarias  
-
-El proyecto incluye un conjunto de pruebas unitarias para garantizar la correcta funcionalidad del cálculo de la nómina. Estas pruebas están definidas en el archivo `TestLiquidadorNomina.py` y se ejecutan con `unittest`.  
-
-Requisitos Previos
-Antes de ejecutar las pruebas, asegúrate de tener instalado Python en tu sistema. Puedes verificarlo con el siguiente comando:  
+Para instalar las dependencias:
 
 ```sh
-python --version
+pip install psycopg2-binary
 ```
 
-Pasos para Ejecutar las Pruebas:
+### 2. Configuración del archivo secret_config.py
 
-1. Abrir la terminal o línea de comandos:
-   - En Windows: `cmd` o `PowerShell`  
-   - En macOS/Linux: `Terminal`  
+El archivo `secret_config.py` ubicado en la carpeta `config/` debe configurarse con los datos de conexión a su base de datos Neon. Este archivo NO contiene datos privados por defecto, solo la estructura para configurarlos.
 
-2. Navegar al directorio del proyecto:
-   Usa el comando `cd` para moverte a la carpeta donde está el proyecto. Por ejemplo:  
+Ejemplo del contenido de `secret_config.py`:
 
+```python
+# Configuración de conexión a Neon DB
+# Sustituya estos valores con los proporcionados en su dashboard de Neon
+
+DB_CONFIG = {
+    'host': 'ep-xyz-123.us-east-2.aws.neon.tech',  # Host de Neon DB
+    'database': 'nomina',      # Nombre de la base de datos
+    'user': 'usuario_neon',    # Usuario de Neon
+    'password': 'su_contraseña_segura',  # Contraseña
+    'port': 5432,              # Puerto estándar de PostgreSQL
+    'sslmode': 'require'       # Requerido para conexiones seguras a Neon
+}
+
+# Constantes del sistema (no modificar)
+VALOR_HORA_BASE = 6189  # Valor base para el cálculo de horas extras
+PORCENTAJE_SALUD_PENSION = 0.08  # 8% de deducciones obligatorias
+SALARIO_MINIMO_2025 = 1423500  # Salario mínimo 2025
+AUXILIO_TRANSPORTE = 162000  # Valor auxilio de transporte
+```
+
+**Importante**: No comparta su archivo `secret_config.py` con datos reales en repositorios públicos.
+
+### 3. Creación de la Base de Datos en Neon
+
+Para configurar su base de datos en Neon:
+
+1. Cree una cuenta en Neon DB (https://neon.tech/) y cree un nuevo proyecto.
+   
+2. En el dashboard de Neon, cree una nueva base de datos llamada `nomina`.
+
+3. Obtenga las credenciales de conexión desde su panel de control y actualice `secret_config.py`.
+
+4. Para inicializar las tablas necesarias, ejecute:
+   ```sh
+   python sql/uso.py --init-db
+   ```
+
+El script `neon_db.py` se encargará de establecer la conexión con Neon DB y gestionar las operaciones de base de datos requeridas por el sistema.
+
+## 🚀 Instrucciones de Ejecución
+
+### Interfaz de Consola (Simulación sin Base de Datos)
+
+Esta interfaz permite realizar simulaciones de cálculo de nómina sin necesidad de conexión a base de datos:
+
+1. Navegar al directorio del proyecto:
    ```sh
    cd ruta/del/proyecto
    ```
 
-3. Ejecutar las pruebas:
-   Para correr todas las pruebas unitarias, usa el siguiente comando:  
-
+2. Ejecutar la interfaz de consola simple:
    ```sh
-   python -m unittest TestLiquidadorNomina.py
+   python src/view/consola/main.py
    ```
 
-4. Ver los resultados
-   - Si todas las pruebas pasan, verás un mensaje indicando que las pruebas fueron exitosas.  
-   - Si alguna prueba falla, se mostrará un mensaje con detalles sobre el error.  
+3. Siga las instrucciones en pantalla para ingresar:
+   - Salario base
+   - Horas extras diurnas y nocturnas
+   - Bonos extra
+   - Deducciones adicionales
+   
+   El sistema calculará y mostrará el valor total de la nómina.
 
-Ejemplo de Salida Exitosa:
-```
-.....
-----------------------------------------------------------------------
-Ran 6 tests in 0.002s
+### Interfaz de Consola con Base de Datos
 
-OK
-```
+Esta interfaz permite gestionar la información en la base de datos Neon DB:
 
-Solución de Problemas:
-- Si recibes un error indicando que `unittest` no está disponible, asegúrate de estar usando la versión correcta de Python.  
-- Si hay errores de importación, revisa que el archivo `TestLiquidadorNomina.py` esté en el mismo directorio o que el módulo `Calculo_Total` esté correctamente referenciado.  
+1. Asegúrese de haber configurado correctamente `secret_config.py` con sus credenciales de base de datos.
 
-
----------------------------------------------------------------------
-
-
-
------->  Instrucciones para ejecutar la interfaz de Consola:
-
-
-El proyecto incluye un archivo `consola.py`, que permite al usuario ingresar datos y calcular la liquidación de nómina de manera interactiva a través de la terminal.  
-
-Requisitos Previos:
-Antes de ejecutar la interfaz de consola, asegúrate de tener instalado Python en tu sistema. Puedes verificarlo con el siguiente comando:  
-
-```sh
-python --version
-```
-
-Pasos para Ejecutar la Interfaz de Consola:
-
-1. Abrir la terminal o línea de comandos:
-   - En Windows: `cmd` o `PowerShell`  
-   - En macOS/Linux: `Terminal`  
-
-2. Navegar al directorio del proyecto:
-   Usa el comando `cd` para moverte a la carpeta donde está el archivo `consola.py`.  
-
+2. Ejecutar la interfaz de base de datos:
    ```sh
-   cd ruta/del/proyecto
+   python interfaz_database.py
    ```
 
-3. Ejecutar el archivo de la interfaz: 
-   Para iniciar la aplicación de consola, ejecuta el siguiente comando:  
+3. La interfaz le permitirá:
+   - Gestionar empleados (crear, consultar, actualizar)
+   - Registrar liquidaciones
+   - Consultar histórico de liquidaciones
 
-   ```sh
-   python consola.py
-   ```
+### Interfaz Gráfica (GUI con Kivy)
 
-4. Ingresar los datos solicitados:
-   La aplicación pedirá que ingreses la siguiente información:  
-   - Salario base  
-   - Horas extras diurnas  
-   - Horas extras nocturnas  
-   - Bonos extra  
-   - Deducciones adicionales  
+Esta interfaz proporciona una experiencia visual para el cálculo de nómina sin conexión a base de datos.
 
-   Introduce los valores según se te pida y presiona `Enter` después de cada uno.
-
-5. Ver el resultado:  
-   Una vez ingresados los datos, el programa calculará la liquidación de la nómina y mostrará el resultado en pantalla.  
-
-   Ejemplo de salida:
-   ```
-   Ingrese su salario base: 2000000
-   Ingrese sus horas extras diurnas: 5
-   Ingrese sus horas extras nocturnas: 2
-   Ingrese sus bonos extras: 50000
-   Ingrese sus deducciones adicionales: 100000
-   El valor total de su nómina es 1,950,320.00
-   ```
-
-Manejo de Errores:
-
-Si ingresas datos incorrectos, el sistema mostrará mensajes de error como:  
-- Salario base negativo: `¡Error salario negativo!`  
-- Deducciones mayores al 40%: `¡Error deducciones mayores al 40%!`  
-- Horas extras no permitidas: `¡Error horas extra superior o igual a 90!`  
-- Entrada inválida: `¡Error digitación! No puedes ingresar letras, por favor corrija ingresando datos numéricos.`  
-
-Notas Adicionales:
-
-- Para finalizar la ejecución, puedes presionar `Ctrl + C` en la terminal.  
-- Si experimentas errores de importación, asegúrate de que los archivos `Calculo_Total.py` y `consola.py` estén en la misma carpeta o correctamente referenciados.  
-
-# 📌 Interfaz Grafica
-
-## 🚀 Requisitos Previos
+#### 🚀 Requisitos Previos
 Antes de ejecutar la aplicación, asegúrese de tener instalado:
 - **Python 3.8+**
 - **Kivy**
-- **Virtualenv (opcional pero recomendado)**
 
-Si no tiene Kivy instalado, puede hacerlo con este comando en la terminal:
+Si no tiene Kivy instalado:
 ```sh
 pip install kivy
 ```
 
-## ▶️ Ejecución
-- Desde la carpeta **raíz** del proyecto, ejecute el siguiente comando en la terminal para iniciar la interfaz gráfica:
+#### Ejecución
+- Desde la carpeta **raíz** del proyecto, ejecute:
 ```sh
 python src/view/gui/kivy_gui.py
 ```
 
-- Desde la carpeta raiz del proyecto tambien puede ejecutar kivy_gui.exe en la ruta dist\kivy_gui.
+- Alternativamente, puede ejecutar el archivo compilado desde:
+```
+dist/kivy_gui/kivy_gui.exe
+```
 
-## 📝 Notas
-- Asegúrese de ejecutar el comando desde la carpeta **CODIGO-LIMPIO-2025_GUI**.
-- Si tiene problemas con Kivy, intente reinstalarlo con `pip install --upgrade kivy`.
+## 🧪 Ejecución de Pruebas Unitarias
 
-## 📌 Autores
-Interfaz grafica desarrollada por Juan Sebastian Pinilla Giraldo y Juan Vallejo
+Para verificar el correcto funcionamiento del sistema:
+
+1. Pruebas del módulo de cálculo:
+   ```sh
+   python -m unittest tests/TestLiquidadorNomina.py
+   ```
+
+2. Pruebas de la conexión a base de datos:
+   ```sh
+   python -m unittest tests/test_db.py
+   ```
+
+## 📊 Fórmulas de Cálculo
+
+### Horas Extra
+```
+horas_extra = ((horas_diurnas*6189)*0.25) + ((horas_nocturnas*6189)*0.75)
+```
+
+### Auxilio de Transporte
+```
+auxilio_tranporte = 0
+if salario_base < 2847000:  # 2 SMMVL
+    auxilio_tranporte = 162000
+```
+
+### Bonos
+```
+bonos = auxilio_tranporte + bonos_extra
+```
+
+### Deducciones
+```
+deducciones = ((salario_base+horas_extra+bonos)*0.08) + deduccion_adicional
+```
+
+### Liquidación Final
+```
+total = salario_base + horas_extra + bonos - deducciones
+```
+
+## ⚠️ Validaciones
+
+El sistema realiza las siguientes validaciones:
+- Salario base no puede ser negativo (`ErrorSalarioN`)
+- Las deducciones no pueden superar el 40% del salario (`ErrorDeduccionesM`)
+- Las horas extras no pueden ser mayores o iguales a 90 (`ErrorHorasExtra`)
+
+## 👥 Autores
+
+- **Samuel Uribe Salazar**: Desarrollo core
+- **Valery Monsalve Correa**: Desarrollo core
+- **Juan Sebastian Pinilla Giraldo**: Interfaz gráfica
+- **Juan Vallejo**: Interfaz gráfica
 
 
 
