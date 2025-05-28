@@ -188,6 +188,7 @@ Si no tiene Kivy instalado:
 ```sh
 pip install kivy
 ```
+si la ejecución de dicha interfaz le genera problemas,lo mas probale es que dicho problema se solucione desactivando la seguridad de Windows 
 
 #### Ejecución
 - Desde la carpeta **raíz** del proyecto, ejecute:
