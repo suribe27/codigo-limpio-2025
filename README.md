@@ -91,51 +91,50 @@ Para instalar las dependencias:
 pip install psycopg2-binary
 ```
 
-### 2. Configuración del archivo secret_config.py
+**2. Configuración del archivo secret_config.py**
 
-El archivo `secret_config.py` ubicado en la carpeta `config/` debe configurarse con los datos de conexión a su base de datos Neon. Este archivo NO contiene datos privados por defecto, solo la estructura para configurarlos.
+El sistema incluye un archivo de plantilla llamado `secret_config_sample.py` ubicado en la carpeta `config/`. Este archivo contiene la estructura necesaria para configurar la conexión a su base de datos Neon.
 
-Ejemplo del contenido de `secret_config.py`:
+**Pasos para la configuración:**
+
+1. **Localice el archivo plantilla**: Encuentre `secret_config_sample.py` en la carpeta `config/`
+
+2. **Configure sus datos de conexión**: Abra el archivo y reemplace los valores de ejemplo con los datos proporcionados en su dashboard de Neon:
 
 ```python
-# Configuración de conexión a Neon DB
-# Sustituya estos valores con los proporcionados en su dashboard de Neon
-
-DB_CONFIG = {
-    'host': 'ep-xyz-123.us-east-2.aws.neon.tech',  # Host de Neon DB
-    'database': 'nomina',      # Nombre de la base de datos
-    'user': 'usuario_neon',    # Usuario de Neon
-    'password': 'su_contraseña_segura',  # Contraseña
-    'port': 5432,              # Puerto estándar de PostgreSQL
-    'sslmode': 'require'       # Requerido para conexiones seguras a Neon
-}
-
-# Constantes del sistema (no modificar)
-VALOR_HORA_BASE = 6189  # Valor base para el cálculo de horas extras
-PORCENTAJE_SALUD_PENSION = 0.08  # 8% de deducciones obligatorias
-SALARIO_MINIMO_2025 = 1423500  # Salario mínimo 2025
-AUXILIO_TRANSPORTE = 162000  # Valor auxilio de transporte
+# Recuerde poner aquí los datos de conexión y guardar como secret_config.py
+PGHOST='ep-xyz-123.us-east-2.aws.neon.tech'  # Host de su base de datos Neon
+PGDATABASE='nomina'                           # Nombre de la base de datos (puede personalizarlo)
+PGUSER='usuario_neon'                         # Usuario de Neon
+PGPASSWORD='su_contraseña_segura'             # Contraseña de su cuenta
 ```
 
-**Importante**: No comparta su archivo `secret_config.py` con datos reales en repositorios públicos.
+3. **Guarde el archivo con el nombre correcto**: Una vez configurados sus datos, guarde el archivo como `secret_config.py` (elimine "_sample" del nombre).
 
-### 3. Creación de la Base de Datos en Neon
+4. **Inicialice la base de datos**: Ejecute el siguiente comando para crear las tablas necesarias:
+
+```bash
+python interfaz_database.py
+```
+
+**Importante**: 
+- NO comparta su archivo `secret_config.py` con datos reales en repositorios públicos
+- Mantenga el archivo `secret_config_sample.py` como plantilla para futuros usos
+- Asegúrese de que `secret_config.py` esté incluido en su archivo `.gitignore`
+
+**3. Creación de la Base de Datos en Neon**
 
 Para configurar su base de datos en Neon:
 
-1. Cree una cuenta en Neon DB (https://neon.tech/) y cree un nuevo proyecto.
-   
-2. En el dashboard de Neon, cree una nueva base de datos llamada `nomina`.
+1. **Cree una cuenta**: Visite https://neon.tech/ y cree una cuenta gratuita
+2. **Cree un nuevo proyecto**: En el dashboard de Neon, cree un nuevo proyecto
+3. **Configure la base de datos**: 
+   - Nombre de la base de datos: `nomina` (o el nombre que prefiera)
+   - Obtenga las credenciales de conexión desde su panel de control
+4. **Actualice la configuración**: Complete los datos en `secret_config_sample.py` y guárdelo como `secret_config.py`
+5. **Inicialice el sistema**: Ejecute `python interfaz_database.py` para crear las tablas y estructura necesaria
 
-3. Obtenga las credenciales de conexión desde su panel de control y actualice `secret_config.py`.
-
-4. Para inicializar las tablas necesarias, ejecute:
-   ```sh
-   python sql/uso.py --init-db
-   ```
-
-El script `neon_db.py` se encargará de establecer la conexión con Neon DB y gestionar las operaciones de base de datos requeridas por el sistema.
-
+El script `interfaz_database.py` se encargará de establecer la conexión con Neon DB y crear automáticamente todas las tablas requeridas por el sistema de nómina.
 ## 🚀 Instrucciones de Ejecución
 
 ### Interfaz de Consola (Simulación sin Base de Datos)
