@@ -2,12 +2,13 @@ import psycopg2
 from psycopg2 import pool
 import os
 from datetime import date
+from config import secret_config
 
 # Datos de conexión
-PGHOST='ep-snowy-lab-a4mk1kuj-pooler.us-east-1.aws.neon.tech'
-PGDATABASE='liquidador_nomina'
-PGUSER='neondb_owner'
-PGPASSWORD='npg_Tg1KxQSat3Yl'
+PGHOST=secret_config_sample.PGHOST
+PGDATABASE=secret_config_sample.PGDATABASE
+PGUSER=secret_config_sample.PGUSER
+PGPASSWORD=secret_config_sample.PGPASSWORD
 
 # Crear un pool de conexiones para mejor rendimiento
 connection_pool = None

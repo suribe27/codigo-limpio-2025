@@ -1,8 +1,0 @@
-# PGHOST='Ingresa el host de tu base de datos'
-# PGDATABASE='Ingresa el nombre de tu base de datos'
-# PGUSER='Ingresa el usuario de tu base de datos'
-# PGPASSWORD='Ingresa la contraseña de tu base de datos'
-PGHOST='ep-snowy-lab-a4mk1kuj-pooler.us-east-1.aws.neon.tech'
-PGDATABASE='liquidador_nomina'
-PGUSER='neondb_owner'
-PGPASSWORD='npg_Tg1KxQSat3Yl'
