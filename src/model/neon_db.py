@@ -5,10 +5,10 @@ from datetime import date
 from config import secret_config
 
 # Datos de conexión
-PGHOST=secret_config_sample.PGHOST
-PGDATABASE=secret_config_sample.PGDATABASE
-PGUSER=secret_config_sample.PGUSER
-PGPASSWORD=secret_config_sample.PGPASSWORD
+PGHOST=secret_config.PGHOST
+PGDATABASE=secret_config.PGDATABASE
+PGUSER=secret_config.PGUSER
+PGPASSWORD=secret_config.PGPASSWORD
 
 # Crear un pool de conexiones para mejor rendimiento
 connection_pool = None
